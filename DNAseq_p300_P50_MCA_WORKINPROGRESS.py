@@ -150,10 +150,13 @@ def resuspend(location):
 	p300.mix(5, 200, location)
 	p300.drop_tip()
 
-#adjust flow rate for more accurate spri
+#adjust flow rate for more accurate spri, and effective resuspension
 def transferspri(vol, location_final, mixvol):
 	p300.set_flow_rate(aspirate=60, dispense=60)
-	p300.transfer(vol, spri, location_final, mix_after=(3,mixvol), touch_tip=True)
+	p300.transfer(vol, spri, location_final)
+	p300.set_flow_rate(aspirate=100, dispense=150)
+	p300.mix(6, mixvol, location_final)
+	p300.touch_tip()
 	p300.set_flow_rate(aspirate=60, dispense=60)
 
 def prep(reaction_volume):
@@ -181,7 +184,7 @@ def shear_clean(reaction_volume):
 	select()
 
 	#Move/save spri waste to enzyme plate column 12
-	p300.transfer(reaction_volume + small_aspiration_extra, magplate.wells('A1').bottom(), enzrack.wells('A4').bottom())
+	p300.transfer(reaction_volume + small_aspiration_extra, magplate.wells('A1').bottom(), enzrack.wells('A4'))
 
 	#wash with 80%EtOH
 	p300.transfer(eth_volume, eth, magplate.wells('A1').bottom())
@@ -212,7 +215,7 @@ def claseek(reaction_volume):
 	tempmodule.wait_for_temp()
 
 	#begin Claseek end-conversion
-	p50.transfer(claseek_end_conversion_mix_volume, end_mix, tempplate.wells('A2').bottom(), mix_after=(3, reaction_volume + claseek_end_conversion_mix_volume - small_aspiration_extra), blow_out=True)
+	p50.transfer(claseek_end_conversion_mix_volume, end_mix, tempplate.wells('A2'), mix_after=(3, reaction_volume + claseek_end_conversion_mix_volume - small_aspiration_extra)
 
 	#update reaction_volume	
 	reaction_volume += claseek_end_conversion_mix_volume
