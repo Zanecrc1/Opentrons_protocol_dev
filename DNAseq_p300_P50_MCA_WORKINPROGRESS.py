@@ -133,12 +133,13 @@ p300 = instruments.P300_Multi(
 
 #TEMPORARY DEF: fix robot gantry speed reset after home() (pending fix from Opentrons)
 def homehead():
-	homehead()
+	robot.home()
 	robot.head_speed(x=70, y=70, z=70, a=70, b=50, c=50)
 	
 #magnetic block selection protocol 
 def select():
-	homehead()
+	robot.home()
+	robot.head_speed(x=70, y=70, z=70, a=70, b=50, c=50)
 	p300.delay(minutes=spri_incubation_time)
 	magmodule.engage(height=magnet_height)
 	p300.delay(minutes=spri_settle_time)
