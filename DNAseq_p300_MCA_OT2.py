@@ -124,13 +124,21 @@ p300 = instruments.P300_Multi(
     dispense_flow_rate=60,
     min_volume=20)
 
+#Mix sequentially reducing height offset by 2mm
+def steppedmix(height,reps,vol,loc):
+	p300.set_flow_rate(aspirate=100, dispense=150)
+	p300.mix(reps, vol, loc.bottom(4)) 
+	p300.mix(reps, vol, loc.bottom(2))
+	p300.mix(reps, vol, loc.bottom())
+	p300.set_flow_rate(aspirate=60, dispense=60)
+
 #TEMPORARY DEF: fix robot gantry speed reset after home() (pending fix from Opentrons)
 def gantrydefault():
 	robot.home()
 	robot.head_speed(x=70, y=70, z=70, a=70, b=50, c=50)
 
 #Check calibration parameters to each labware item before beginning protocol
-def calibrationcheck()
+def calibrationcheck():
 	gantrydefault()
 	p300.pick_up_tip()
 	p300.move_to(enzrack.wells('A1').bottom())
