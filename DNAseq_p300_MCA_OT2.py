@@ -125,7 +125,7 @@ p300 = instruments.P300_Multi(
     min_volume=20)
 
 #Mix sequentially reducing height offset by 2mm
-def steppedmix(height,reps,vol,loc):
+def steppedmix(reps,vol,loc):
 	p300.set_flow_rate(aspirate=100, dispense=150)
 	p300.mix(reps, vol, loc.bottom(4)) 
 	p300.mix(reps, vol, loc.bottom(2))
