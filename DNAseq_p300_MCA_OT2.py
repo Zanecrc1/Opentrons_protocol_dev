@@ -9,7 +9,7 @@
 #
 #
 # BEFORE BEGINNING
-# Attach correct pipettors (P300 Multi on left mount, p30 Multi on right mount)
+# Attach correct pipettors (P300 Multi on left mount)
 # Set OT-2 to calibrate to the bottom of wells 
 # Calibrate OT-2  
 # Fill 12-row trough based on lines 57-59, prepare claseek kit end-conversion and adapter ligation mixes.
